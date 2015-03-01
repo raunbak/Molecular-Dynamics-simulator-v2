@@ -1,0 +1,35 @@
+﻿Build started 05/02/2015 12:51:24.
+     1>Project "C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\MD\MD.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
+         Main.cpp
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(11): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(21): warning C4305: 'initializing' : truncation from 'int' to 'const float'
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(22): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(23): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(24): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(25): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\desktop\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h(26): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\MD.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\MD.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\MD.lib" /MACHINE:X86 Debug\cuSource.cu.obj
+         Debug\BisectionRootFinder.obj
+         Debug\FastEnsemble.obj
+         Debug\FastIon.obj
+         Debug\forces.obj
+         Debug\integrator.obj
+         Debug\Main.obj
+         Debug\stdafx.obj
+         MD.vcxproj -> C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\MD.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\bin\cudart*.dll" "C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\bin\cudart*.dll" "C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\bin\cudart*.dll" "C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\bin\cudart32_60.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\bin\cudart64_60.dll
+                 2 file(s) copied.
+     1>Done Building Project "C:\Users\Raunbak\Desktop\Molecular-Dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\MD\MD\MD.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.98

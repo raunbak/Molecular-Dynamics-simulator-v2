@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{2382e2b7-8c2c-4994-9e8e-c7d46f9dbd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{f4ef0a49-48e5-4a5b-bc65-7e0eccf99c10}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BisectionRootFinder.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="FastEnsemble.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="FastIon.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="forces.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="integrator.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="cudaforces.cuh">
+      <Filter>Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BisectionRootFinder.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="FastEnsemble.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="FastIon.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="forces.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="integrator.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="cuSource.cu">
+      <Filter>Source files</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>
