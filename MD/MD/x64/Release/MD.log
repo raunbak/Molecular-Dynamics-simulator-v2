@@ -1,8 +1,8 @@
-﻿Build started 01/03/2015 14:11:36.
+﻿Build started 05/03/2015 12:47:32.
      1>Project "C:\Users\Raunbak\Documents\GitHub\Molecular-Dynamics-simulator-v2\MD\MD\MD.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt Main.cpp
-         Main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt FastEnsemble.cpp
+         FastEnsemble.cpp
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(11): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(21): warning C4305: 'initializing' : truncation from 'int' to 'const float'
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(22): warning C4305: 'initializing' : truncation from 'double' to 'const float'
@@ -35,4 +35,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.62
+Time Elapsed 00:00:05.55

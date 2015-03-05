@@ -68,10 +68,12 @@ int main(int argc, char* argv[])
 		else if (ERROR_ALREADY_EXISTS == GetLastError())
 		{
 			// Directory already exists
+			cin.get();
 			return 0;
 		}
 		else
 		{
+			cin.get();
 			return 0;
 			 // Failed for some other reason
 		}
@@ -107,7 +109,11 @@ int main(int argc, char* argv[])
 	cout << "Allocating memory..\n";
 	Trap trap(OmegaRF,r0,z0,eta,StartVelOfIons,dirName);
 	//int m1, int n1, int m2, int n2
+	
+	
 	FastEnsemble crystal(MassOfIons,NumberOfIons,IonsCharge,binSize,SizeOfHistogramsX,SizeOfHistogramsY,SizeOfHistogramsZ, trap);
+	
+	
 	cout << "Generating crystal...\n";
 	crystal.CrystalGenerator(RFVoltage,ECVoltage);
 	crystal.SetSteadyStateTemperature(SimulatedTemperatur);
@@ -207,10 +213,12 @@ int main(int argc, char* argv[])
 		else if (ERROR_ALREADY_EXISTS == GetLastError())
 		{
 			// Directory already exists
+			cin.get();
 			return 0;
 		}
 		else
 		{
+			cin.get();
 			return 0;
 			 // Failed for some other reason
 		}
@@ -241,15 +249,177 @@ int main(int argc, char* argv[])
 	double IonsTwoCharge			= strtod(argv[21],0);
 
 	cout << "Allocating memory..\n";
+	clock_t tStart = clock();
 	Trap trap(OmegaRF,r0,z0,eta,StartVelOfIons,dirName);
+	
+	
 	FastEnsemble crystal(IonOneMass,IonOneN,IonsOneCharge,IonTwoMass,IonTwoMass,IonsTwoCharge,binSize,SizeOfHistogramsX,SizeOfHistogramsY,SizeOfHistogramsZ, trap);
 
-
+	
 	cout << "Generating crystal...\n";
 	crystal.CrystalGenerator(RFVoltage,ECVoltage);
 	crystal.SetSteadyStateTemperature(SimulatedTemperatur);
 
+	TwoIonTypesTemperatureRescaleLeFrogintegrator(crystal,Timesteps,StartRecordingOfHistogram, RFVoltage, ECVoltage, StepsPrRFPeriode, trap);
+	
+	printf("Time taken for simulation: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
+	cout << "Now saving to datafiles\n";
+
+	// Saves histogram data to file
+	ofstream Histogramfile1 (dirName+"\\HistogramDataIonTypeOne.txt");
+	Histogramfile1 << "Bin  i j k" << endl ;
+
+	ofstream VHistfile1 (dirName+"\\VelocityHistogramDataTypeOne.txt");
+	VHistfile1 << "Sum of all velocity in this bin  i \t j \t k" << endl ;
+
+	ofstream CHistfile1 (dirName+"\\CountHistogramDataTypeOne.txt");
+	CHistfile1 << "bin  i j k" << endl ;
+
+		// Saves histogram data to file
+	ofstream Histogramfile2 (dirName+"\\HistogramDataIonTypeTwo.txt");
+	Histogramfile2 << "Bin  i j k" << endl ;
+
+	ofstream VHistfile2 (dirName+"\\VelocityHistogramDataTypeTwo.txt");
+	VHistfile2 << "Sum of all velocity in this bin  i \t j \t k" << endl ;
+
+	ofstream CHistfile2 (dirName+"\\CountHistogramDataTypeTwo.txt");
+	CHistfile2 << "bin  i j k" << endl ;
+
+		// Saves histogram data to file
+	ofstream Histogramfile3 (dirName+"\\HistogramDataIonTypeBoth.txt");
+	Histogramfile3 << "Bin  i j k" << endl ;
+
+	ofstream VHistfile3 (dirName+"\\VelocityHistogramDataTypeBoth.txt");
+	VHistfile3 << "Sum of all velocity in this bin  i \t j \t k" << endl ;
+
+	ofstream CHistfile3 (dirName+"\\CountHistogramDataTypeBoth.txt");
+	CHistfile3 << "bin  i j k" << endl ;
+
+
+	cout << "Hist streams created...\n";
+
+
+	for(int i=0; i < SizeOfHistogramsX; i++)
+	{
+		for(int j=0; j < SizeOfHistogramsY; j++)
+		{
+			for(int k=0; k < SizeOfHistogramsZ; k++)
+			{
+				if (Histogramfile1.is_open())
+				{
+					Histogramfile1	<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 0)				<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+				if (VHistfile1.is_open())
+				{
+					VHistfile1		<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 2)			<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+				if (CHistfile1.is_open())
+				{
+					CHistfile1		<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 1)		<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+
+				if (Histogramfile2.is_open())
+				{
+					Histogramfile2	<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 0)				<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+				if (VHistfile2.is_open())
+				{
+					VHistfile2		<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 2)			<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+				if (CHistfile2.is_open())
+				{
+					CHistfile2		<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 1)		<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+
+				if (Histogramfile3.is_open())
+				{
+					Histogramfile3	<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 0)				<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+				if (VHistfile3.is_open())
+				{
+					VHistfile3		<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 2)			<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+				if (CHistfile3.is_open())
+				{
+					CHistfile3		<< crystal.ReturnFromTwoTypeIonHist(i, j, k, 1)		<< ",  " 
+									<< i										<< ",  " 
+									<< j										<< ",  " 
+									<< k				
+									<< endl;
+
+				}
+
+
+			}
+		}
+	}
+
+	Histogramfile1.close();
+	VHistfile1.close();
+	CHistfile1.close();
+		Histogramfile2.close();
+	VHistfile2.close();
+	CHistfile2.close();
+		Histogramfile3.close();
+	VHistfile3.close();
+	CHistfile3.close();
+    
+	crystal.SaveIonDataToFile();
+
+	/*
+	ofstream Configfile (dirName+"\\Configuration.txt");
+	Configfile << RFVoltage << " " << ECVoltage << " " << SimulatedTemperatur << " " 
+			   << StartVelOfIons << " " << NumberOfIons << " " << MassOfIons << " "
+			   << Timesteps << " " << StartRecordingOfHistogram << " " << StepsPrRFPeriode << " "
+				<< SizeOfHistogramsX << " " << SizeOfHistogramsY << " " << SizeOfHistogramsZ << " "
+				<< OmegaRF << " " << r0 << " " << z0 << " " << eta <<" " << binSize << " " << IonsCharge << endl;  
+    */                                                   
+	cout << "Quest completed! I mean data saved!\n";
+	cout << "Press a key to end the program\n";
+
+
+		cin.get();
 		return 0;
 	}
 	/*
@@ -359,6 +529,7 @@ int main(int argc, char* argv[])
 	cout << "Press a key to end the program\n";
 
 
+	
 	cin.get();
 	
 	

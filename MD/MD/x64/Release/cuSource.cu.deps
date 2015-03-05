@@ -242,7 +242,7 @@ c:\program files\nvidia gpu computing toolkit\cuda\v6.0\include\host_defines.h
 c:\program files\nvidia gpu computing toolkit\cuda\v6.0\include\vector_functions.h
 c:\program files\nvidia gpu computing toolkit\cuda\v6.0\include\device_launch_parameters.h
 c:\program files\nvidia gpu computing toolkit\cuda\v6.0\include\vector_types.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\stdafx.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\stdafx.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\swprintf.inl
@@ -250,14 +250,8 @@ C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tchar.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\mbstring.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\constants.h
-C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\cstring
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\FastEnsemble.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\integrator.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\FastIon.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\integrator.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\FastEnsemble.h
-C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream
+C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string
+C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iterator
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\istream
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ios
@@ -267,6 +261,7 @@ C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\cstdio
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\streambuf
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xiosbase
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocale
+C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\cstring
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdexcept
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\exception
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef
@@ -325,12 +320,20 @@ C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\cerrno
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\errno.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\share.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\FastEnsemble.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\integrator.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\FastIon.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\integrator.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\FastEnsemble.h
+C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\Trap.h
 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\fstream
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\FastIon.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\forces.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\FastIon.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\FastEnsemble.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\integrator.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\BisectionRootFinder.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\FastIon.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\forces.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\FastIon.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\FastEnsemble.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\integrator.h
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\BisectionRootFinder.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include\cuda.h
-c:\users\raunbak\dropbox\exetest\release\startforfra\ioncompbuild\molecular-dynamics-simulator-55e57c582072093eaf8d501395f58b3c4cd3a967\md\md\cudaforces.cuh
+c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\cudaforces.cuh

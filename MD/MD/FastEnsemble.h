@@ -28,10 +28,14 @@ public:
 	double Length;					// Length of the crystal
 	double PixelToDistance;
 	
+	int IonOneN;
+	int IonTwoN;
 	double IonStartVel;
 	double IonsTypeOneCharge;
 	double IonsTypeTwoCharge;
+	double ReducedMass;
 	Trap trap;
+
 
 	int HistNx;
 	int HistNy;  // x and y should be the same...
@@ -76,8 +80,11 @@ public:
 	double ReturnCountHist(int i, int j, int k);
 
 
-	// For two ion types
+	// For two ion types, they are only for use in the two ion type case!
 	void InitialiseHistogramsForTwoIonTypes();
+	void UpdateVelandCountHistograms();
+	void UpdateHistograms(); 
+	double ReturnFromTwoTypeIonHist(int i, int j, int k, int dim);
 
 
 	// friend function

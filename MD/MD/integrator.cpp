@@ -378,9 +378,7 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 	int StartRecordingHistogram = StartHistograms;
 
 	// allocate memory to the histogram
-	ensemble.InitialiseHistogram();
-	ensemble.InitialiseVelocityHistogram();
-	ensemble.InitialiseCountHistogram();
+	ensemble.InitialiseHistogramsForTwoIonTypes();
 	
 	// make Cuda Pos and Force arrays - its float because we dont want to overflow the GPU
 	float *PosX, *PosY, *PosZ, *ForceX, *ForceY, *ForceZ;
@@ -439,9 +437,18 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 	double Total_V_x_rms = 0.0;
 	double Total_V_y_rms = 0.0;
 	// 
-	ofstream Temperaturefile (trap.dirName+"\\TemperatureData.txt");
+	ofstream TemperaturefileOne (trap.dirName+"\\TemperatureDataIonTypeOne.txt");
+	ofstream TemperaturefileTwo (trap.dirName+"\\TemperatureDataIonTypeTwo.txt");
+	ofstream TemperaturefileBoth (trap.dirName+"\\TemperatureDataIons.txt");
+	TemperaturefileOne << "First line of output" << endl;
+	TemperaturefileTwo << "First line of output" << endl;
+	TemperaturefileBoth << "First line of output" << endl;
+	
+	
+	
+	//ofstream Temperaturefile (trap.dirName+"\\TemperatureData.txt");
 
-	Temperaturefile << "First line of output" << endl ;
+	//Temperaturefile << "First line of output" << endl ;
 	ofstream Periodefile (trap.dirName+"\\PeriodeData.txt");
 	Periodefile << "First line of output" << endl ;
 
@@ -460,7 +467,86 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 		//CoulombWrapper( ForceX, ForceY, ForceZ, PosX, PosY, PosZ, ensemble.GetNumberOfIons());
 		FastCoulombWrapper( ForceX, ForceY, ForceZ, PosX, PosY, PosZ, ForceX_d, ForceY_d, ForceZ_d, PosX_d, PosY_d, PosZ_d, ensemble.GetNumberOfIons());
 		// calculating coulomb force on GPU with cuda
+		//  For output of temperatures.
 
+		double TotalVOne	= 0.0;
+		double TotalVzOne	= 0.0;
+		double TotalVrOne	= 0.0;
+		double TotalVxOne	= 0.0;
+		double TotalVyOne	= 0.0;
+
+		double TotalVTwo	= 0.0;
+		double TotalVzTwo	= 0.0;
+		double TotalVrTwo	= 0.0;
+		double TotalVxTwo	= 0.0;
+		double TotalVyTwo	= 0.0;
+
+		double TotalV		= 0.0;
+		double TotalVz		= 0.0;
+		double TotalVr		= 0.0;
+		double TotalVx		= 0.0;
+		double TotalVy		= 0.0;
+
+		// updating position, looping through ions and x-y-z
+		for(int N=0; N < ensemble.GetNumberOfIons(); N++)
+		{
+			// This is dim X
+			double Ftot = Ftrap(ensemble, N, t-1, 0, Vrf, Vend,dt,trap) + ((double) ForceX[N]);
+			TempPos[N][0]  = ensemble.ions[N].Pos[0] + dt*dt*Ftot/ensemble.ions[N].m/2 + dt*ensemble.ions[N].Vel[0];
+			TempVel[N][0]  = ensemble.ions[N].Vel[0] + dt/ensemble.ions[N].m*Ftot;
+
+			// This is dim Y
+			Ftot = Ftrap(ensemble, N, t-1, 1, Vrf, Vend,dt,trap) + ((double) ForceY[N]);
+				
+			TempPos[N][1]  = ensemble.ions[N].Pos[1] + dt*dt*Ftot/ensemble.ions[N].m/2 + dt*ensemble.ions[N].Vel[1];
+			TempVel[N][1]  = ensemble.ions[N].Vel[1] + dt/ensemble.ions[N].m*Ftot;
+
+			// This is dim Z
+			Ftot = Ftrap(ensemble, N, t-1, 2, Vrf, Vend,dt,trap) + ((double) ForceZ[N]);
+			
+			TempPos[N][2]  = ensemble.ions[N].Pos[2] + dt*dt*Ftot/ensemble.ions[N].m/2 + dt*ensemble.ions[N].Vel[2];
+			TempVel[N][2]  = ensemble.ions[N].Vel[2] + dt/ensemble.ions[N].m*Ftot;
+
+			TotalV	+= pow(TempVel[N][0],2) + pow(TempVel[N][1],2) + pow(TempVel[N][2],2);
+			TotalVz += pow(TempVel[N][2],2);
+			TotalVr += pow(TempVel[N][0],2) + pow(TempVel[N][1],2);
+			TotalVx += pow(TempVel[N][0],2);
+			TotalVy += pow(TempVel[N][1],2);
+			if (N == (ensemble.IonOneN)-1) 
+			{
+				TotalVOne	= sqrt( TotalV / ensemble.IonOneN);
+				TotalVzOne	= sqrt( TotalVz / ensemble.IonOneN);
+				TotalVrOne	= sqrt( TotalVr / ensemble.IonOneN);
+				TotalVxOne	= sqrt (TotalVx / ensemble.IonOneN);
+				TotalVyOne	= sqrt( TotalVy / ensemble.IonOneN);
+
+			}
+			if (N == (ensemble.IonOneN))
+			{
+				TotalVTwo	+= pow(TempVel[N][0],2) + pow(TempVel[N][1],2) + pow(TempVel[N][2],2);
+				TotalVzTwo  += pow(TempVel[N][2],2);
+				TotalVrTwo  += pow(TempVel[N][0],2) + pow(TempVel[N][1],2);
+				TotalVxTwo  += pow(TempVel[N][0],2);
+				TotalVyTwo  += pow(TempVel[N][1],2);	
+			}
+		}
+
+		TotalV  = sqrt(TotalV / ensemble.GetNumberOfIons()); // Now TotalV is the root mean squared of the total speed. (So avg speed of 1 ion)
+		TotalVz = sqrt(TotalVz / ensemble.GetNumberOfIons());
+		TotalVr = sqrt(TotalVr / ensemble.GetNumberOfIons());
+		TotalVx = sqrt(TotalVx / ensemble.GetNumberOfIons());
+		TotalVy = sqrt(TotalVy / ensemble.GetNumberOfIons());
+
+		TotalVTwo  = sqrt(TotalVTwo  / ensemble.IonTwoN); // Now TotalV is the root mean squared of the total speed. (So avg speed of 1 ion)
+		TotalVzTwo = sqrt(TotalVzTwo / ensemble.IonTwoN);
+		TotalVrTwo = sqrt(TotalVrTwo / ensemble.IonTwoN);
+		TotalVxTwo = sqrt(TotalVxTwo / ensemble.IonTwoN);
+		TotalVyTwo = sqrt(TotalVyTwo / ensemble.IonTwoN);
+
+
+
+
+/*
 		//  For output of temperatures.
 		double TotalV = 0.0;
 		double TotalVz = 0.0;
@@ -500,17 +586,37 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 		TotalVr = sqrt(TotalVr / ensemble.GetNumberOfIons());
 		TotalVx = sqrt(TotalVx / ensemble.GetNumberOfIons());
 		TotalVy = sqrt(TotalVy / ensemble.GetNumberOfIons());
-		
+*/		
 		// Saving to temperaturefile.
 
+		TemperaturefileBoth << t <<  ",  "
+						<< (pow(TotalV,2) * ensemble.ReducedMass)/(3*Kb)	<<  ",  "
+						<< (pow(TotalVz,2)* ensemble.ReducedMass)/(Kb)	<<  ",  "
+						<< (pow(TotalVx,2)* ensemble.ReducedMass)/(Kb)	<<  ",  " 
+						<< (pow(TotalVy,2)* ensemble.ReducedMass)/(Kb)	<<  ",  " 
+						<< endl;
 
-		Temperaturefile << t <<  ",  "
+		TemperaturefileOne << t <<  ",  "
+						<< (pow(TotalVOne,2) * ensemble.ions[ensemble.IonOneN-1].m)/(3*Kb)	<<  ",  "
+						<< (pow(TotalVzOne,2)* ensemble.ions[ensemble.IonOneN-1].m)/(Kb)	<<  ",  "
+						<< (pow(TotalVxOne,2)* ensemble.ions[ensemble.IonOneN-1].m)/(Kb)	<<  ",  " 
+						<< (pow(TotalVyOne,2)* ensemble.ions[ensemble.IonOneN-1].m)/(Kb)	<<  ",  " 
+						<< endl;
+
+		TemperaturefileTwo << t <<  ",  "
+						<< (pow(TotalVTwo,2) * ensemble.ions[ensemble.IonTwoN-1].m)/(3*Kb)	<<  ",  "
+						<< (pow(TotalVzTwo,2)* ensemble.ions[ensemble.IonTwoN-1].m)/(Kb)	<<  ",  "
+						<< (pow(TotalVxTwo,2)* ensemble.ions[ensemble.IonTwoN-1].m)/(Kb)	<<  ",  " 
+						<< (pow(TotalVyTwo,2)* ensemble.ions[ensemble.IonTwoN-1].m)/(Kb)	<<  ",  " 
+						<< endl;
+
+		/*Temperaturefile << t <<  ",  "
 						<< (pow(TotalV,2) * ensemble.ions[0].m)/(3*Kb)	<<  ",  "
 						<< (pow(TotalVz,2)* ensemble.ions[0].m)/(Kb)	<<  ",  "
 						<< (pow(TotalVx,2)* ensemble.ions[0].m)/(Kb)	<<  ",  " 
 						<< (pow(TotalVy,2)* ensemble.ions[0].m)/(Kb)	<<  ",  " 
 						<< endl;
-
+		*/
 		// saving time step
 		for(int N=0; N < ensemble.GetNumberOfIons(); N++)
 		{
@@ -537,8 +643,9 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 
 			if (t >= StartRecordingHistogram)
 			{
-				ensemble.MyUpdateVelocityHistogram();
-				ensemble.UpdateCountHistogram();
+				ensemble.UpdateVelandCountHistograms();
+				//ensemble.MyUpdateVelocityHistogram();
+				//ensemble.UpdateCountHistogram();
 			
 
 
@@ -620,7 +727,7 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 			{
 				cout << "Record started " << endl; 
 			}
-			ensemble.UpdateHistogram();
+			ensemble.UpdateHistograms();
 		}
 		
 		if ( t % 10000 == 0 ) {
@@ -630,7 +737,9 @@ void TwoIonTypesTemperatureRescaleLeFrogintegrator(FastEnsemble & ensemble, int 
 	}
 
 	Periodefile.close();
-	Temperaturefile.close();
+	TemperaturefileOne.close();
+	TemperaturefileTwo.close();
+	TemperaturefileBoth.close();
 
 	// cleaning up on GPU
 	CudaCoulombFree(PosX_d, PosY_d, PosZ_d, ForceX_d, ForceY_d, ForceZ_d);

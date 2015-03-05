@@ -20,6 +20,9 @@ FastEnsemble::FastEnsemble(int m1, int n1,double ioncharge1, int m2, int n2,doub
 	SteadyStateTemperature = 0.0;//SteadyStateTzSec;
 	NumberOfIons=n1+n2;
 	ions = new FastIon [NumberOfIons];
+	ReducedMass = (m1*m2)/(m1+m2);
+	IonOneN = n1;
+	IonTwoN = n2;
 
 	for(int n = 0; n < NumberOfIons; n++) {
 		if (n<n1 ){
@@ -586,8 +589,8 @@ void FastEnsemble::SaveIonDataToFile()
 void FastEnsemble::InitialiseHistogramsForTwoIonTypes()
 {
 	int SpeciesOfIons = 2;
-	histograms = new long double *** [SpeciesOfIons*3+3];
-	for (int x = 0; x < SpeciesOfIons*3+3; x++)
+	histograms = new long double *** [9];
+	for (int x = 0; x < 9; x++)
 	{
 		histograms[x] = new long double ** [HistNx];
 		for(int i = 0; i < HistNx;i++)
@@ -600,11 +603,92 @@ void FastEnsemble::InitialiseHistogramsForTwoIonTypes()
 		}
 	}
 
-	for (int x = 0; x<(SpeciesOfIons*3+3);x++)
+	for (int x = 0; x<9;x++)
 		for(int i=0; i < HistNx; i++)
 			for(int j=0; j < HistNy; j++)
 				for(int k=0; k < HistNz; k++)
 					histograms[x][i][j][k] = 0;
 
+
+	
+	cout << histograms[0][0][0][0] << endl;
+	cout << histograms[1][0][0][0] << endl;
+	cout << histograms[2][0][0][0] << endl;
+
+	cout << histograms[3][0][0][0] << endl;
+	cout << histograms[4][0][0][0] << endl;
+	cout << histograms[5][0][0][0] << endl;
+	
+	cout << histograms[6][0][0][0] << endl;
+	cout << histograms[7][0][0][0] << endl;
+	cout << histograms[8][0][0][0] << endl;
+	
+
+}
+
+void FastEnsemble::UpdateVelandCountHistograms()
+{ 
+	for (int i = 0; i < NumberOfIons; i++)
+	{
+
+		int Nx = ((int) ((ions[i].Position(0))/PixelToDistance+((double) HistNx)/2));
+		int Ny = ((int) ((ions[i].Position(1))/PixelToDistance+((double) HistNy)/2));
+		int Nz = ((int) ((ions[i].Position(2))/PixelToDistance+((double) HistNz)/2));
+
+		// Fyld i det samlede histogram
+		if (Nx < HistNx && Ny < HistNy && Nz < HistNz && Nx > 0 && Ny > 0 && Nz > 0)
+		{
+			histograms[7][Nx][Ny][Nz]++;
+			histograms[8][Nx][Ny][Nz]+= ((long double) pow(ions[i].Velocity(),2));
+		}
+		// Fyld i ion 1 histogram
+		if (Nx < HistNx && Ny < HistNy && Nz < HistNz && Nx > 0 && Ny > 0 && Nz > 0 && i < IonOneN)
+		{
+			histograms[1][Nx][Ny][Nz]++;
+			histograms[2][Nx][Ny][Nz]+= ((long double) pow(ions[i].Velocity(),2));
+		}
+		// Fyld i ion 2 histogram
+		if (Nx < HistNx && Ny < HistNy && Nz < HistNz && Nx > 0 && Ny > 0 && Nz > 0 && i > IonOneN)
+		{
+			histograms[4][Nx][Ny][Nz]++;
+			histograms[5][Nx][Ny][Nz]+= ((long double) pow(ions[i].Velocity(),2));
+		}
+
+	}
+}
+
+void FastEnsemble::UpdateHistograms()
+{ 
+	for (int i = 0; i < NumberOfIons; i++)
+	{
+		
+		int Nx = ((int) ((ions[i].Position(0))/PixelToDistance+((double) HistNx)/2));
+		int Ny = ((int) ((ions[i].Position(1))/PixelToDistance+((double) HistNy)/2));
+		int Nz = ((int) ((ions[i].Position(2))/PixelToDistance+((double) HistNz)/2));
+		
+		// Fyld i det samlede histogram
+		if (Nx < HistNx && Ny < HistNy && Nz < HistNz && Nx > 0 && Ny > 0 && Nz > 0)
+		{
+			
+			histograms[6][Nx][Ny][Nz]++;
+			
+		}
+		// Fyld i ion 1 histogram
+		if (Nx < HistNx && Ny < HistNy && Nz < HistNz && Nx > 0 && Ny > 0 && Nz > 0 && i < IonOneN)
+		{
+			histograms[0][Nx][Ny][Nz]++;
+		}
+		// Fyld i ion 2 histogram
+		if (Nx < HistNx && Ny < HistNy && Nz < HistNz && Nx > 0 && Ny > 0 && Nz > 0 && i > IonOneN)
+		{
+			histograms[3][Nx][Ny][Nz]++;
+		}
+		
+	}
+}
+
+double FastEnsemble::ReturnFromTwoTypeIonHist(int i, int j, int k, int dim)
+{
+	return histograms[dim][i][j][k];
 }
 
