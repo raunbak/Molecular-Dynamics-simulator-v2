@@ -68,6 +68,7 @@ public:
 	// Histogram and data functions
 	void SavePositionToFile();
 	void SaveIonDataToFile();
+	void SaveTwoIonPositionToFile();
 
 	void MyUpdateVelocityHistogram();
 	void InitialiseHistogram();
@@ -85,6 +86,7 @@ public:
 	void UpdateVelandCountHistograms();
 	void UpdateHistograms(); 
 	double ReturnFromTwoTypeIonHist(int i, int j, int k, int dim);
+	void RescaleVelocityXYZTwoSpecies(double Total_V_x_rms1,double Total_V_y_rms1,double Total_V_z_rms1,double Total_V_x_rms2,double Total_V_y_rms2,double Total_V_z_rms2);
 
 
 	// friend function

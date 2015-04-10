@@ -20,7 +20,7 @@ void FastIon::CleanUpIon()
 void FastIon::initialize(int mass, double chargeIne) // setting mass and allocating memory
 {
 	m = mass*u2kg;  // mass should always be in u
-	charge = chargeIne*e;
+	charge = chargeIne;
 	Pos = new double [3];
 	Vel = new double [3];
 }

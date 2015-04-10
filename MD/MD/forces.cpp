@@ -31,13 +31,13 @@ double Fcoulumb(FastEnsemble & ensemble, int N, int dim)
 double Ftrap(FastEnsemble & ensemble, int N, int TimeStep, int dim, double Vrf, double Vend, double dt, Trap trap) // fix units, do some thing smart with dt ie make a table
 {
 	if (dim == 0) // x
-		return e*((trap.eta*Vend/pow(trap.z0,2) - Vrf*cos(trap.OmegaRF*TimeStep*dt)/pow(trap.r0,2))*ensemble.ions[N].Pos[dim]);
+		return (e*ensemble.ions[N].charge)*((trap.eta*Vend/pow(trap.z0,2) - Vrf*cos(trap.OmegaRF*TimeStep*dt)/pow(trap.r0,2))*ensemble.ions[N].Pos[dim]);
 
 	if (dim == 1) // y
-		return e*(trap.eta*Vend/pow(trap.z0,2) + Vrf/pow(trap.r0,2)*cos(trap.OmegaRF*TimeStep*dt))*ensemble.ions[N].Pos[dim];
+		return (e*ensemble.ions[N].charge)*(trap.eta*Vend/pow(trap.z0,2) + Vrf/pow(trap.r0,2)*cos(trap.OmegaRF*TimeStep*dt))*ensemble.ions[N].Pos[dim];
 
 	if (dim == 2) // z
-		return -2*e*trap.eta*Vend/pow(trap.z0,2)*ensemble.ions[N].Pos[dim];
+		return -2*(e*ensemble.ions[N].charge)*trap.eta*Vend/pow(trap.z0,2)*ensemble.ions[N].Pos[dim]; // Er det 2 gange ladningen ? 
 
 	return NULL;
 }

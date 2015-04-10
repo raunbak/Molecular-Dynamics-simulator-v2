@@ -68,6 +68,8 @@ int main(int argc, char* argv[])
 		else if (ERROR_ALREADY_EXISTS == GetLastError())
 		{
 			// Directory already exists
+			cout << "Folder exists, please remove or delete to start simulation" << endl;
+			cout << "Press any key to close program " << endl;
 			cin.get();
 			return 0;
 		}
@@ -123,8 +125,8 @@ int main(int argc, char* argv[])
 	cout << "using steps with length = " << 1/(OmegaRF/2/PI)/StepsPrRFPeriode  << "s\n";
 
 	// Create the integrator.
-	TemperatureRescaleLeFrogintegrator(crystal, Timesteps, StartRecordingOfHistogram, RFVoltage, ECVoltage, StepsPrRFPeriode, trap);
-	
+	//TemperatureRescaleLeFrogintegrator(crystal, Timesteps, StartRecordingOfHistogram, RFVoltage, ECVoltage, StepsPrRFPeriode, trap);
+	NewTemperatureRescaleLeFrogintegrator(crystal, Timesteps, StartRecordingOfHistogram, RFVoltage, ECVoltage, StepsPrRFPeriode, trap);
 	printf("Time taken for simulation: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
 	cout << "Now saving to datafiles\n";
@@ -190,8 +192,11 @@ int main(int argc, char* argv[])
 				<< SizeOfHistogramsX << " " << SizeOfHistogramsY << " " << SizeOfHistogramsZ << " "
 				<< OmegaRF << " " << r0 << " " << z0 << " " << eta <<" " << binSize << " " << IonsCharge << endl;  
                                                        
+	//crystal.SavePositionToFile();
+	
 	cout << "Quest completed! I mean data saved!\n";
 	cout << "Press a key to end the program\n";
+
 
 
 	cin.get();
@@ -213,11 +218,14 @@ int main(int argc, char* argv[])
 		else if (ERROR_ALREADY_EXISTS == GetLastError())
 		{
 			// Directory already exists
+			cout << "Folder exists, please remove or delete to start simulation" << endl;
+			cout << "Press any key to close program " << endl;
 			cin.get();
 			return 0;
 		}
 		else
 		{
+			cout << "Program could not create folder, Press any key to close program " << endl;
 			cin.get();
 			return 0;
 			 // Failed for some other reason
@@ -253,7 +261,7 @@ int main(int argc, char* argv[])
 	Trap trap(OmegaRF,r0,z0,eta,StartVelOfIons,dirName);
 	
 	
-	FastEnsemble crystal(IonOneMass,IonOneN,IonsOneCharge,IonTwoMass,IonTwoMass,IonsTwoCharge,binSize,SizeOfHistogramsX,SizeOfHistogramsY,SizeOfHistogramsZ, trap);
+	FastEnsemble crystal(IonOneMass,IonOneN,IonsOneCharge,IonTwoMass,IonTwoN,IonsTwoCharge,binSize,SizeOfHistogramsX,SizeOfHistogramsY,SizeOfHistogramsZ, trap);
 
 	
 	cout << "Generating crystal...\n";
@@ -407,14 +415,18 @@ int main(int argc, char* argv[])
     
 	crystal.SaveIonDataToFile();
 
-	/*
+	
 	ofstream Configfile (dirName+"\\Configuration.txt");
 	Configfile << RFVoltage << " " << ECVoltage << " " << SimulatedTemperatur << " " 
-			   << StartVelOfIons << " " << NumberOfIons << " " << MassOfIons << " "
+			   << StartVelOfIons << " " <<  IonOneN <<  IonOneMass <<  IonTwoN << " " <<  IonTwoMass << " "
 			   << Timesteps << " " << StartRecordingOfHistogram << " " << StepsPrRFPeriode << " "
 				<< SizeOfHistogramsX << " " << SizeOfHistogramsY << " " << SizeOfHistogramsZ << " "
-				<< OmegaRF << " " << r0 << " " << z0 << " " << eta <<" " << binSize << " " << IonsCharge << endl;  
-    */                                                   
+				<< OmegaRF << " " << r0 << " " << z0 << " " << eta <<" " << binSize << " " << IonsOneCharge << IonsTwoCharge << endl;  
+     
+	Configfile.close();
+
+	crystal.SavePositionToFile();
+
 	cout << "Quest completed! I mean data saved!\n";
 	cout << "Press a key to end the program\n";
 
