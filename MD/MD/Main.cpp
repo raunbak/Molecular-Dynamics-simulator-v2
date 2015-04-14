@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
 	int SizeOfHistogramsY			= atoi(argv[11]);
 	int SizeOfHistogramsZ			= atoi(argv[12]); 
 
-	double OmegaRF					= strtod(argv[13], 0); 
+	double OmegaRF					= strtod(argv[13], 0)*1e6; 
 	double r0						= strtod(argv[14], 0);    
 	double z0						= strtod(argv[15], 0);	 
 	double eta						= strtod(argv[16], 0);    
@@ -247,7 +247,7 @@ int main(int argc, char* argv[])
 	int SizeOfHistogramsY			= atoi(argv[13]);
 	int SizeOfHistogramsZ			= atoi(argv[14]);
 
-	double OmegaRF					= strtod(argv[15], 0);
+	double OmegaRF					= strtod(argv[15], 0)*1e6;
 	double r0						= strtod(argv[16], 0);
 	double z0						= strtod(argv[17], 0);
 	double eta						= strtod(argv[18], 0);

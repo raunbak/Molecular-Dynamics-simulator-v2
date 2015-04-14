@@ -1,7 +1,7 @@
-﻿Build started 09/04/2015 12:35:17.
+﻿Build started 14/04/2015 12:45:48.
      1>Project "C:\Users\Raunbak\Documents\GitHub\Molecular-Dynamics-simulator-v2\MD\MD\MD.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt FastEnsemble.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt FastEnsemble.cpp Main.cpp integrator.cpp
          FastEnsemble.cpp
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(11): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(21): warning C4305: 'initializing' : truncation from 'int' to 'const float'
@@ -10,6 +10,25 @@
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(24): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(25): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(26): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+         Main.cpp
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(11): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(21): warning C4305: 'initializing' : truncation from 'int' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(22): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(23): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(24): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(25): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(26): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+         integrator.cpp
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(11): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(21): warning C4305: 'initializing' : truncation from 'int' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(22): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(23): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(24): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(25): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\raunbak\documents\github\molecular-dynamics-simulator-v2\md\md\constants.h(26): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>integrator.cpp(41): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>integrator.cpp(411): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>integrator.cpp(868): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Raunbak\Documents\GitHub\Molecular-Dynamics-simulator-v2\MD\x64\Release\MD.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Raunbak\Documents\GitHub\Molecular-Dynamics-simulator-v2\MD\x64\Release\MD.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Raunbak\Documents\GitHub\Molecular-Dynamics-simulator-v2\MD\x64\Release\MD.lib" /MACHINE:X64 x64\Release\cuSource.cu.obj
          x64\Release\BisectionRootFinder.obj
@@ -35,4 +54,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.98
+Time Elapsed 00:00:04.62
